@@ -1,19 +1,17 @@
-function net = main(beta,inputSize,op,txFun,lrnRate, epochs)
+function net = main(beta,inputSize,op,txFun,lrnRate, epochs, M, H)
     trainSet = feval(strcat(op, num2str(inputSize)));
-    W = rand(inputSize+1,1);
+%W = rand(inputSize+1,1);
 %W = zeros(inputSize+1,1);
+net = createNet(inputSize, M, H);
+%calculas los o de cada capa
 for j = 1:epochs
-    for i = 1:size(trainSet)
-
-    %calculas los o de cada capa
-    o = feval(txFun,[-1 trainSet{i}{1}]*W,beta);
-    %calculas los delta de cada capa
-    dW = [-1 trainSet{i}{1}]*lrnRate*(trainSet{i}{2} - o);
-    %updateas los valores de cada capa
-    W = W+dW';
+    for i = 1: size(trainSet, 1)
+%Calculamos la salida
+        net = evaluateNet(net,trainSet{i}{1},txFun,beta);
+%calculo de deltas
+        net = calculateDeltas(net, trainSet{i}{2});
+%update de pesos
+        net = updateWeights(net,trainSet{i}{1},txFun,beta,lrnRate);
     end
 end
-
-net.W = W;
-net.trainSet = trainSet;
 endfunction
