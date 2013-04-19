@@ -5,7 +5,9 @@ function net = main(beta,inputSize,op,txFun,lrnRate, epochs, M, H)
 net = createNet(inputSize, M, H);
 %calculas los o de cada capa
 for j = 1:epochs
+    %trainSet = shuffle(trainSet);
     for i = 1: size(trainSet, 1)
+
 %Calculamos la salida
         net = evaluateNet(net,trainSet{i}{1},txFun,beta);
 %calculo de deltas
