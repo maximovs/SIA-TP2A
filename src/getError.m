@@ -1,3 +1,3 @@
-function error = getError(txFun, o, s)
-	error = sumsq(s - o);
+function error = getError(o, s)
+	error = abs(s - o);
 endfunction 

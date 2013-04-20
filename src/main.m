@@ -1,10 +1,10 @@
 function net = main(beta,inputSize,op,txFun,lrnRate, lrnStrategy, epochs, M, H)
     net = createNet(inputSize, M, H, lrnRate, lrnStrategy);
-    %trainSet = feval(strcat(op, num2str(inputSize)));
+    trainSet = feval(strcat(op, num2str(inputSize)));
     net.amp = 1;
 
-    net = getTrainSet(net, 'TimeSerie_G7.mat');
-    trainSet = net.trainSet;
+    %net = getTrainSet(net, 'TimeSerie_G7.mat');
+    %trainSet = net.trainSet;
 %W = rand(inputSize+1,1);
 %W = zeros(inputSize+1,1);
 %calculas los o de cada capa
@@ -22,10 +22,11 @@ for j = 1:epochs
 %update de pesos
 		net = updateWeights(net,trainSet{i}{1},txFun,beta);
 %update de error
-		error = error + getError(txFun, net.out, trainSet{i}{2});
+		error = error + getError(net.out, trainSet{i}{2});
     end
     epochError = error/size(trainSet,1);
     net = updateLrnRate(net, epochError);
     net.epochErrors(j) = epochError;
 end
+plot(1:epochs, net.epochErrors, '-4; Step Error;');
 endfunction
