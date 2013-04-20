@@ -1,4 +1,5 @@
 function o = netResult(net,input,txFun,beta)
+	input = input./net.amp;
 	o = [-1 input];
 	for i = 1:net.h
 		aux = feval(txFun,o*net.weights{i},beta);
