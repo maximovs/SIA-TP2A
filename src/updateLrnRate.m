@@ -15,14 +15,14 @@ function newNet = updateLrnRate (net, error)
 	endif
 	if(net.lrnStrategy == 3)
 		if(error > net.prevErr)
-			net.counter = 0;
+			net.count = 0;
 			net.lrnRate = net.lrn_B * net.lrnRate;
 			if( net.lrnRate < 0.025)
 				net.lrnRate = 0.025;
 			endif
-		elseif( error < net.prev_err)
-			net.counter +=1;
-			if(net.counter >= net.lrn_K)
+		elseif( error < net.prevErr)
+			net.count +=1;
+			if(net.count >= net.lrn_K)
 				net.lrnRate = net.lrnRate + net.lrn_A;
 				if(net.lrnRate > 0.5)
 					net.lrnRate = 0.5;

@@ -7,6 +7,6 @@ function o = netResult(net,input,txFun,beta)
 	end
 	net.neurons{net.h+1}.values = o*net.weights{net.h+1};
 	o = feval(txFun,o*net.weights{net.h+1},beta);
-
+	o = o*net.amp;
 
 endfunction

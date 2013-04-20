@@ -23,6 +23,7 @@ function net = createNet(N,M,H,lrnRate,lrnStrategy)
 		aux.values = zeros(1);
 		net.neurons{H+1} = aux;
 		net.count = 0;
+		net.prevErr = 9999999999;
 		net.lrnRate = lrnRate;
 		net.lrnStrategy = lrnStrategy;
 		net.lrn_A = 0.01;

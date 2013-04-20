@@ -1,12 +1,18 @@
 function net = main(beta,inputSize,op,txFun,lrnRate, lrnStrategy, epochs, M, H)
-    trainSet = feval(strcat(op, num2str(inputSize)));
+    net = createNet(inputSize, M, H, lrnRate, lrnStrategy);
+    %trainSet = feval(strcat(op, num2str(inputSize)));
+    net.amp = 1;
+
+    net = getTrainSet(net, 'TimeSerie_G7.mat');
+    trainSet = net.trainSet;
 %W = rand(inputSize+1,1);
 %W = zeros(inputSize+1,1);
-net = createNet(inputSize, M, H, lrnRate, lrnStrategy);
 %calculas los o de cada capa
+    net.epochErrors = zeros(epochs,1);
 for j = 1:epochs
 	error = 0;
-    %trainSet = shuffle(trainSet);
+    
+    trainSet = shuffle(trainSet);
     for i = 1: size(trainSet, 1)
 
 %Calculamos la salida
@@ -20,5 +26,6 @@ for j = 1:epochs
     end
     epochError = error/size(trainSet,1);
     net = updateLrnRate(net, epochError);
+    net.epochErrors(j) = epochError;
 end
 endfunction
