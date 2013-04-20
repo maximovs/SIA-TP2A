@@ -1,4 +1,5 @@
-function newNet = updateWeights(net,in,txFun, beta,eta)
+function newNet = updateWeights(net,in,txFun, beta)
+	eta = net.lrnRate;
 	dW = [-1 feval(txFun,in,beta)]'*(feval(strcat(txFun,'der'),net.neurons{1}.values,beta).*net.neurons{1}.deltas);
 	net.weights{1} = net.weights{1} + dW*eta;
 	for i=1:net.h

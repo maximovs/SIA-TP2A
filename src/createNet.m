@@ -1,4 +1,4 @@
-function net = createNet(N,M,H)
+function net = createNet(N,M,H,lrnRate,lrnStrategy)
 	net.h=H;
 	net.n=N;
 	net.m=M;
@@ -22,4 +22,10 @@ function net = createNet(N,M,H)
 		aux.deltas = zeros(1);
 		aux.values = zeros(1);
 		net.neurons{H+1} = aux;
+		net.count = 0;
+		net.lrnRate = lrnRate;
+		net.lrnStrategy = lrnStrategy;
+		net.lrn_A = 0.01;
+		net.lrn_B = 0.7;
+		net.lrn_K = 4;
 endfunction
