@@ -1,10 +1,10 @@
 function net = main(beta,inputSize,op,txFun,lrnRate, lrnStrategy, epochs, M, H)
     net = createNet(inputSize, M, H, lrnRate, lrnStrategy);
-    trainSet = feval(strcat(op, num2str(inputSize)));
+    %trainSet = feval(strcat(op, num2str(inputSize)));
     net.amp = 1;
 
-    %net = getTrainSet(net, 'TimeSerie_G7.mat');
-    %trainSet = net.trainSet;
+    net = getTrainSet(net, 'TimeSerie_G7.mat');
+    trainSet = net.trainSet;
 %W = rand(inputSize+1,1);
 %W = zeros(inputSize+1,1);
 %calculas los o de cada capa

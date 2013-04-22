@@ -6,7 +6,7 @@ function o = compareTs(net,trainSet,txFun,beta)
 		s(i) = trainSet{i}{2};
 		aux(i) = netResult(net,trainSet{i}{1},txFun,beta);
 	end
-	plot(s,aux,'x');
+	plot(s-aux);
 	aux
 
 endfunction

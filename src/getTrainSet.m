@@ -8,7 +8,7 @@ function newNet = getTrainSet(net, file)
 	values = values./net.amp;
 	res = cell(size(values,2)*0.05,2);
 	for i=1:size(res, 1)
-		res{i} = {values(i:i+2) values(i+3)};
+		res{i} = {values(i:i+3) values(i+4)};
 	end
 
 	net.trainSet = res;
