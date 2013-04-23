@@ -3,14 +3,15 @@ function net = createNet(N,M,H,lrnRate,lrnStrategy)
 	net.n=N;
 	net.m=M;
 	net.weights = cell(H+1,1);
+	maxRand = 0.7;
 	if(H<1)
-		net.weights{1} = rand(N+1,1);
+		net.weights{1} = rand(N+1,1)*maxRand;
 	else		
-		net.weights{1} = rand(N+1,M);
+		net.weights{1} = rand(N+1,M)*maxRand;
 		for i = 2:H
-			net.weights{i} = rand(M+1,M);
+			net.weights{i} = rand(M+1,M)*maxRand;
 		end
-		net.weights{H+1} = rand(M+1,1);
+		net.weights{H+1} = rand(M+1,1)*maxRand;
 	endif
 	net.out = 1;
 	net.neurons = cell(H+1,1);
