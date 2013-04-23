@@ -1,3 +1,3 @@
 function error = getError(o, s)
-	error = abs(s - o);
+	error = (s - o)^2;
 endfunction 
