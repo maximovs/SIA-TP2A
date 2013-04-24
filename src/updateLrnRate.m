@@ -2,7 +2,7 @@ function newNet = updateLrnRate (net, error)
 	%Updates the learn rate according to learn strategy
 	%1 = CONSTANT
 	%2 = ANNEALED
-	%3 = SMART
+	%3 = ADAPTATIVE
 	%min learn rate is 0.025
 	%max learn rate is 0.5
 	
