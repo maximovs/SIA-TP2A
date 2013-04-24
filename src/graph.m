@@ -15,17 +15,19 @@ function graph(net, file, txFun, beta, from, to)
 	netFunction = zeros(1, size(trainSet, 1)-3);
 	for i = 1: size(trainSet, 1)-3
 		net = evaluateNet(net,trainSet{i}{1},txFun,beta);
-		netFunction(i) = net.out*net.amp;
+		netFunction(i) = net.out;
 	end
 
-	values = values.*net.amp;
-
+subplot(3,1,3);
+plot([from:to], abs([values(1:3) netFunction] - values(1:size(trainSet, 1))), '-4; Error;');
+  ylabel ('Error');
+values = values.*net.amp;
+netFunction = netFunction.*net.amp;
 	subplot(3,1,1);
-	plot(values(1:size(trainSet, 1)));
+	plot([from:to], values(1:size(trainSet, 1)));
+  ylabel ('Funcion original');
 	subplot(3,1,2);
-	plot([values(1:3) netFunction]);
-
-	subplot(3,1,3);
-	plot(abs([values(1:3) netFunction] - values(1:size(trainSet, 1))));
+	plot([from:to], [values(1:3) netFunction]);
+  ylabel ('Funcion aprendida por la red');
 
 endfunction

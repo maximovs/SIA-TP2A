@@ -1,12 +1,15 @@
-function net = main(beta,inputSize,op,txFun,lrnRate, lrnStrategy, epochs, M, H)
+function net = main(beta,inputSize,inFileOrOp,txFun,lrnRate, lrnStrategy, epochs, M, H)
     net = createNet(inputSize, M, H, lrnRate, lrnStrategy);
-    %trainSet = feval(strcat(op, num2str(inputSize)));
     net.amp = 1;
 
-    net = getTrainSet(net, 'TimeSerie_G7.mat');
-    trainSet = net.trainSet;
-%W = rand(inputSize+1,1);
-%W = zeros(inputSize+1,1);
+    if(strcmp(inFileOrOp,'and') || strcmp(inFileOrOp ,'or') || strcmp(inFileOrOp,'par') || strcmp(inFileOrOp,'xor'))
+        trainSet = feval(strcat(inFileOrOp, num2str(inputSize)));
+        net.trainSet = trainSet
+    else
+        net = getTrainSet(net, inFileOrOp);
+        trainSet = net.trainSet;
+    endif
+
 %calculas los o de cada capa
     net.epochErrors = zeros(epochs,1);
 for j = 1:epochs
@@ -28,5 +31,6 @@ for j = 1:epochs
     net = updateLrnRate(net, epochError);
     net.epochErrors(j) = epochError;
 end
-plot(1:epochs, net.epochErrors, '-4; Step Error;');
+subplot(1,1,1);
+plot(1:epochs, net.epochErrors, '-4; Error;');
 endfunction
