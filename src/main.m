@@ -1,5 +1,5 @@
-function net = main(beta,inputSize,inFileOrOp,txFun,lrnRate, lrnStrategy, epochs, M, H)
-    net = createNet(inputSize, M, H, lrnRate, lrnStrategy);
+function net = main(beta,inputSize,inFileOrOp,txFun,lrnRate, lrnStrategy, epochs, M, H,momentum, alpha)
+    net = createNet(inputSize, M, H, lrnRate, lrnStrategy, momentum, alpha);
     net.amp = 1;
 
     if(strcmp(inFileOrOp,'and') || strcmp(inFileOrOp ,'or') || strcmp(inFileOrOp,'par') || strcmp(inFileOrOp,'xor'))
